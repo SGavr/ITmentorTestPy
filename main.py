@@ -1,13 +1,22 @@
-from userData import *
-from calculation import *
+import sys
+from userData import user_input, int_filter
+from calculation import calc_operation
 
-data = user_input()
+def main(input: str) -> str:
+    data_array = str.split(" ")
+    data_array[0] = int(data_array[0])
+    data_array[2] = int(data_array[2])
 
-data_array = data.split(" ")
-data_array[0] = int(data_array[0])
-data_array[2] = int(data_array[2])
+    int_filter(data_array[0])
+    int_filter(data_array[2])
 
-int_filter(data_array[0])
-int_filter(data_array[2])
+    return calc_operation(data_array[0], data_array[1], data_array[2])
 
-print(calc_operation(data_array[0], data_array[1], data_array[2]))
+try:
+    str = user_input()
+    result = main(str)
+except ValueError as e:
+    print(e)
+    sys.exit(1)
+
+print(result)
